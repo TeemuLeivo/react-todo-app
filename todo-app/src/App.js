@@ -47,19 +47,19 @@ const App = () => {
     <div>
       <h1>Todo app</h1>
       <h2> Create new todo item</h2>
-      <input value={newItem} onChange={newItemHandler} type="text" />
+      <textarea value={newItem} onChange={newItemHandler} />
       <button onClick={addItemHandler} >Add item</button>
       <h2 >Todo items </h2>
           <div>
             <ul>
             {todoItems.map(item => {
-                let classes = "todo-row"
+                let contentClasses = "todo-row-content"
                 if(item.done){
-                  classes = classes.concat(" checked")
+                  contentClasses = contentClasses.concat(" checked")
                 }
                 return (
-                  <li className={classes} key={item.name + item.content}>
-                    <div className="todo-row-content">{item.content}</div>
+                  <li className="todo-row" key={item.name + item.content}>
+                    <div className={contentClasses}>{item.content}</div>
                     <input onClick={() => doneHandler(item)} checked={item.done} type="checkbox"/>
                     <button onClick={() => deleteHandler(item.id)} >Delete</button>
                   </li>

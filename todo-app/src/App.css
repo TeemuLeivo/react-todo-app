@@ -1,7 +1,14 @@
-.todo-row.checked {
+.todo-row {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.todo-row-content.checked {
   text-decoration: line-through;
 }
 
 .todo-row-content {
-  max-width: 5em;
+  width: 40em;
+  margin-right: 5em;
 }
