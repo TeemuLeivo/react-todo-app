@@ -1,26 +1,74 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
+import ReactDOM from 'react-dom'
 import './App.css';
+import axios from 'axios'
+import todoService from './services/todoItem'
 
-function App() {
+const App = () => {
+  const [todoItems, setTodoItems] = useState([])
+  const [newItem, setNewItem] = useState("")
+
+  const getDataHook = () => {
+    todoService.getAll().then(allItems => {
+      setTodoItems(allItems);
+    })
+  }
+  useEffect(getDataHook, [])
+
+  const doneHandler = (item) => {
+    console.log(item)
+    const updatedItem = {...item, done: !item.done }
+    console.log(updatedItem)
+    todoService.updateItem(updatedItem).then(getDataHook)
+  }
+
+  const addItemHandler = (event) => {
+    console.log(newItem)
+    const randomId = Math.floor(Math.random() * 1000000000);
+    const todoItem  = {'content':  newItem,
+                       'id': randomId,
+                       'done': false
+                      }
+    todoService.create(todoItem).then(addedItem => {
+      setTodoItems(todoItems.concat(addedItem))
+    })
+    setNewItem("")
+  }
+
+  const newItemHandler = (event) => {
+    setNewItem(event.target.value)
+  }
+
+  const deleteHandler = (id) => {
+    todoService.deleteItem(id).then(getDataHook)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Todo app</h1>
+      <h2> Create new todo item</h2>
+      <input value={newItem} onChange={newItemHandler} type="text" />
+      <button onClick={addItemHandler} >Add item</button>
+      <h2 >Todo items </h2>
+          <div>
+            <ul>
+            {todoItems.map(item => {
+                let classes = "todo-row"
+                if(item.done){
+                  classes = classes.concat(" checked")
+                }
+                return (
+                  <li className={classes} key={item.name + item.content}>
+                    <div className="todo-row-content">{item.content}</div>
+                    <input onClick={() => doneHandler(item)} checked={item.done} type="checkbox"/>
+                    <button onClick={() => deleteHandler(item.id)} >Delete</button>
+                  </li>
+                );
+              })}
+            </ul> 
+          </div>
     </div>
-  );
+  )
 }
 
 export default App;
