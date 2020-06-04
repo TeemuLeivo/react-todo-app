@@ -46,7 +46,7 @@ const App = () => {
     <div>
       <h1>Todo app</h1>
       <h2> Create new todo item</h2>
-      <input type="text" value={newItem} onChange={newItemHandler} />
+      <input id="newItemInput" type="text" value={newItem} onChange={newItemHandler} />
       <button onClick={addItemHandler}>Add item</button>
       <TodoList
         doneHandler={doneHandler}
