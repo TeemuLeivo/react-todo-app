@@ -47,11 +47,11 @@ const App = () => {
     <div>
       <h1>Todo app</h1>
       <h2> Create new todo item</h2>
-      <textarea value={newItem} onChange={newItemHandler} />
+      <input type="text" value={newItem} onChange={newItemHandler} />
       <button onClick={addItemHandler} >Add item</button>
       <h2 >Todo items </h2>
           <div>
-            <ul>
+            <ul className="todo-list">
             {todoItems.map(item => {
                 let contentClasses = "todo-row-content"
                 if(item.done){
@@ -59,9 +59,11 @@ const App = () => {
                 }
                 return (
                   <li className="todo-row" key={item.name + item.content}>
+                    <div className="todo-actions-row">
+                      <span className="done-checkbox"> Done <input onClick={() => doneHandler(item)} checked={item.done} type="checkbox"/> </span>
+                      <button onClick={() => deleteHandler(item.id)} >Delete</button>
+                    </div>
                     <div className={contentClasses}>{item.content}</div>
-                    <input onClick={() => doneHandler(item)} checked={item.done} type="checkbox"/>
-                    <button onClick={() => deleteHandler(item.id)} >Delete</button>
                   </li>
                 );
               })}

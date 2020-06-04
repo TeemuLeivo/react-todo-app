@@ -1,7 +1,15 @@
+#root{
+  margin-left: 1em;
+}
+
+.todo-list {
+  padding-inline-start: 20px;
+}
+
 .todo-row {
   display: flex;
   justify-content: flex-start;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .todo-row-content.checked {
@@ -11,4 +19,13 @@
 .todo-row-content {
   width: 40em;
   margin-right: 5em;
+}
+
+.todo-actions-row {
+  margin-bottom: 0.5em;
+  margin-top: 2em;
+}
+
+.todo-actions-row button {
+  margin-left: 1em;
 }
