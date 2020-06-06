@@ -4,11 +4,13 @@ The application lets you save todo items, mark them done and delete them
 ### Installing the application
 npm install
 
-### Run server
+### Running server
 npm run server
 
-### Run client
+### Running client
 npm start
 
 ### Run tests
 npx cypress open
+
+Click 'Run all specs' in the Cypress window
