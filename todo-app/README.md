@@ -1,11 +1,14 @@
 ### Todo application
 The application lets you save todo items, mark them done and delete them
 
-## Running the application
+# Installing the application
 npm install
 
 # Run server
-npm start server
+npm run server
 
 # Run client
 npm start
+
+# Run tests
+npx cypress open
